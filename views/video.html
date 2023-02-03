@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main</title>
+        <link rel="stylesheet" href="/css/video_style.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    </head>
+    <body>
+        <div id="page">
+            <div id="nav">
+                <div id="nav_left" onclick="location.href = '/';">
+                    <img src="/img/logo.png">
+                    <h1>Veeti Kurkela Harjoitustyö</h1>
+                </div>
+                <div id="nav_right">
+                    <p class="p_no_cursor"><%= username %> | <a href="upload">Upload</a> | <a href="logout">Log out</a></p>
+                </div>
+            </div>
+            <div id="content">
+                <div id="video">
+                    <%- content %>
+                    <h1><%= vid_name %></h1>
+                    <p><%= vid_desc %></p>
+                    <hr>
+                    <div id="reactions">
+                        <div id="likes" class="" onclick="updateLikes();">
+                            <p id="likes_count"><%= likes %></p>
+                            <img src="img/thumbsup.png">
+                        </div>
+                        <div id="dislikes" class="" onclick="updateDislikes();">
+                            <p id="dislikes_count"><%= dislikes %></p>
+                            <img src="img/thumbsdown.png">
+                        </div>
+                        <%- owners_tools %>
+                    </div>
+                    <div id="comments">
+                        <div id="comment_box">
+                            <textarea placeholder="Type here to comment" name="commentbox" id="commentbox"></textarea>
+                            <br>
+                            <button id="comment_btn" onclick="onCommented();">Comment</button>
+                        </div>
+                        <p id="commentstext">Comments</p>
+                        <%- comments %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%- del_confirm %>
+        <script>
+            document.getElementById("commentbox").value = "";
+
+            var like_state = '<%= likestate  %>';
+            var dislike_state = '<%= dislikestate  %>';
+            const video_id = (new URLSearchParams(window.location.search)).get("id");
+
+            function deleteVideoConfirmation() {
+                const del_confirm = document.getElementById("del_confirm");
+
+                if (del_confirm) {
+                    del_confirm.className = "visible";
+                }
+            }
+
+            function confirmDelete() {
+                const requestOptions = {
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({id: video_id})
+                };
+
+                commentbox.value = "";
+
+                fetch("/video", requestOptions)
+                .then((response) => {
+                    window.location.href = "/";
+                });
+            }
+
+            function confirmCancel() {
+                const del_confirm = document.getElementById("del_confirm");
+
+                if (del_confirm) {
+                    del_confirm.className = "invisible";
+                }
+            }
+
+            if (like_state == "true") {
+                document.getElementById("likes").className = "liked";
+            }
+
+            if (dislike_state == "true") {
+                document.getElementById("dislikes").className = "disliked";
+            }
+
+            function onCommented() {
+                let commentbox = document.getElementById("commentbox");
+                let commentbtn = document.getElementById("comment_btn");
+
+                commentbtn.disabled = true;
+
+                var div = document.createElement("div");
+                div.setAttribute("class", "comment");
+                
+                div.innerHTML = '<h3>' + document.cookie.split("=")[1].split(";")[0] + '</h3><p>' + commentbox.value + '</p>'
+                
+                document.getElementById("comments").insertBefore(div, document.getElementById("commentstext").nextSibling);
+
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({comment: commentbox.value, id: video_id})
+                };
+
+                commentbox.value = "";
+
+                fetch("/video", requestOptions)
+                .then((response) => {
+                    commentbtn.disabled = false;
+                });
+            }
+            
+            function updateLikes() {
+                let likes = document.getElementById("likes");
+                let likes_count = document.getElementById("likes_count");
+
+                const was_liked = likes.className === "liked";
+                const was_disliked = document.getElementById("dislikes").className === "disliked";
+
+                likes.className = was_liked ? "" : "liked";
+                likes_count.innerText = Number(likes_count.innerText) + (was_liked ? -1 : 1);
+
+                if (was_disliked) {
+                    let dislikes_count = document.getElementById("dislikes_count");
+                    document.getElementById("dislikes").className = "";
+                    dislikes_count.innerText = Number(dislikes_count.innerText) - 1;
+                }
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({type: 0, id: video_id})
+                };
+
+                fetch(window.location.href, requestOptions)
+                .then((response) => {
+                    console.log("reply back");
+                });
+            }
+
+            function updateDislikes() {
+                let dislikes = document.getElementById("dislikes");
+                let dislikes_count = document.getElementById("dislikes_count");
+
+                const was_liked = document.getElementById("likes").className === "liked";
+                const was_disliked = dislikes.className === "disliked";
+
+                dislikes.className = was_disliked ? "" : "disliked";
+                dislikes_count.innerText = Number(dislikes_count.innerText) + (was_disliked ? -1 : 1);
+                
+                if (was_liked) {
+                    let likes_count = document.getElementById("likes_count");
+                    document.getElementById("likes").className = "";
+                    likes_count.innerText = Number(likes_count.innerText) - 1;
+                }
+
+                const requestOptions = {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({type: 1, id: video_id})
+                };
+
+                fetch(window.location.href, requestOptions)
+                .then((response) => {
+                    console.log("reply back");
+                });
+            }
+        </script>
+    </body>
+</html>

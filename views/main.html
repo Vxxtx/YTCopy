@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main</title>
+        <link rel="stylesheet" href="/css/main_style.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    </head>
+    <body>
+        <div id="page">
+            <div id="nav">
+                <div id="nav_left" onclick="location.href = '/';">
+                    <img src="/img/logo.png">
+                    <h1>Veeti Kurkela Harjoitustyö</h1>
+                </div>
+                <div id="nav_right">
+                    <p class="p_no_cursor"><%= username %> | <a href="upload">Upload</a> | <a href="logout">Log out</a></p>
+                </div>
+                <!--<div id="nav_mid">
+                    <input type="text" placeholder="Search">
+                </div>-->
+            </div>
+            <div id="content">
+                <%- content %>
+            </div>
+        </div>
+    </body>
+</html>

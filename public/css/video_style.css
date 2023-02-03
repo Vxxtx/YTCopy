@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+}
+
+body {
+    background-color: rgb(36, 36, 36);
+}
+
+#page {
+    text-align: center;
+}
+
+#nav {
+    width: 100%;
+    border-bottom: 1px solid rgb(0, 89, 255);
+    box-shadow: 0 0 15px rgb(0, 89, 255);
+    height: 2.5em;
+    float: left;
+}
+
+#nav_left {
+    float: left;
+    width: 290px;
+    height: auto;
+    cursor: pointer;
+}
+
+#nav_left img {
+    float: left;
+    margin-top: .15em;
+    margin-right: .5em;
+    margin-left: .5em;
+    width: 30px;
+}
+
+#nav_mid {
+    float: right;
+    padding-top: .35em;
+    padding-right: .75em;
+}
+
+#nav_mid input {
+    width: 30ch;
+    border-radius: 5px;
+}
+
+#nav_mid input {
+    color: white;
+    background-color: rgb(54, 54, 54);
+    border: 0;
+    width: 30ch;
+    height: 25px;
+    font-family: Calibri;
+}
+
+#nav_mid input:focus {
+    background-color: rgb(51, 51, 51);
+    border: 0;
+    outline: 0;
+}
+
+#nav_right {
+    float: right;
+    margin-top: .55em;
+    padding-right: .25em;
+}
+
+h1 {
+    color: white;
+    font-family: Verdana;
+    font-size: 1em;
+    text-align: left;
+    padding-top: .55em;
+    margin-bottom: .25em;
+}
+
+p {
+    color: white;
+    font-family: Verdana;
+    margin-bottom: 0.5em;
+}
+
+.p_no_cursor:hover {
+    cursor: default;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(91, 150, 201);
+}
+
+#content {
+    padding-top: 15px;
+    width: 70%;
+    clear: left;
+    margin: 0 auto;
+    background-color: rgb(27, 27, 27);
+    height: auto;
+    padding: 3em 3em;
+}
+
+video {
+    width: 99%;
+    text-align: center;
+    height: auto;
+}
+
+#video {
+    text-align: left;
+    color: white;
+}
+
+#reactions {
+    margin-top: 0.75em;
+    padding-bottom: 15px;
+    width: 100%;
+    float: left;
+}
+
+#likes, #dislikes {
+    width: auto;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+#reactions img {
+    width: 20px;
+    margin-left: 10px;
+    height: auto;
+}
+
+#reactions p {
+    float: left;
+}
+
+#owners_tools {
+    display: inline-block;
+}
+
+#owners_tools strong {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: red;
+    cursor: pointer;
+}
+
+#comments {
+    margin-top: 1em;
+}
+
+.comment {
+    background-color: rgb(36, 36, 36);
+    margin-bottom: 3px;
+}
+
+.comment p {
+    font-size: 12px;
+    padding: 5px;
+    padding-bottom: 0;
+    margin-bottom: 3px;
+    vertical-align: top;
+}
+
+.comment h3 {
+    font-family: Verdana;
+    font-size: 15px;
+    padding-left: 5px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+input {
+    color: white;
+    background-color: rgb(36, 36, 36);
+    border: 0;
+    margin: 3px 0;
+    width: 30ch;
+    height: 30px;
+}
+
+form {
+    display: inline;
+}
+
+input:focus {
+    background-color: rgb(51, 51, 51);
+    border: 0;
+    outline: 0;
+}
+
+textarea {
+    height: 60px;
+    width: 99%;
+    background-color:rgb(37, 37, 37);
+    border: 0;
+    outline: 0;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    resize: none;
+}
+
+textarea:hover {
+    background-color:rgb(71, 71, 71);
+}
+
+textarea:active {
+    background-color: rgb(97, 97, 97);
+}
+
+button {
+    background-color:rgb(37, 37, 37);
+    border: 0;
+    outline: 0;
+    color: white;
+    width: 15ch;
+    height: 5ch;
+    margin-bottom: 15px;
+    margin-top: 5px;
+}
+
+button:hover {
+    background-color:rgb(71, 71, 71);
+}
+
+button:active {
+    background-color: rgb(97, 97, 97);
+}
+
+#del_confirm {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(24, 24, 24, 0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+#del_confirm_inner {
+    width: 30%;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(24, 24, 24);
+    border: 1px solid rgb(0, 89, 255);
+    box-shadow: 0 0 15px rgb(0, 89, 255);
+    display: inline-block;
+    padding: 10px;
+}
+
+#del_confirm_inner h3 {
+    text-align: center;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+#del_confirm_buttons {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.visible {
+    display: inline;
+}
+
+.invisible {
+    display: none;
+}

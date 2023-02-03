@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    </head>
+    <body>
+        <div id="page">
+            <div id="login_container">
+                <h2>Register</h2>
+                <div id="login_boxes">
+                    <form id="reg_inputs" form action="register" method="post">
+                        <input type="text" name="us_input" placeholder="Username">
+                        <input type="password" name="pwd_input" placeholder="Password">
+                        <input type="password" name="pwd_again_input" placeholder="Password Again">
+                        <input type="submit" value="Register">
+                    </form>
+                    <form action="login">
+                        <input type="submit" value="Back">
+                    </form>
+                    <p><%= error_text %></p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

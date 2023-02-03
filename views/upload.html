@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Main</title>
+        <link rel="stylesheet" href="/css/upload_style.css">
+        <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    </head>
+    <body>
+        <div id="page">
+            <div id="nav">
+                <div id="nav_left" onclick="location.href = '/';">
+                    <img src="/img/logo.png">
+                    <h1>Veeti Kurkela Harjoitustyö</h1>
+                </div>
+                <div id="nav_right">
+                    <p class="p_no_cursor"><%= username %> | <a href="upload">Upload</a> | <a href="logout">Log out</a></p>
+                </div>
+            </div>
+            <div id="content">
+                <div id="uploadbox">
+                    <h3>Upload</h3>
+                    <hr>
+                    <form ref='uploadForm' 
+                        id='uploadForm' 
+                        action='/upload' 
+                        method='post' 
+                        encType="multipart/form-data">
+                            <p>Maximum video size is 30mb. File as mp4.</p>
+                            <label for="video" class="custom_submit">
+                                Select File
+                            </label>
+                            <p class="invisible" id="filename">Filename</p>
+                            <p class="invisible" id="filesize">Filesize</p>
+                            <input id="video" type="file" name="video" onchange="updateFileText();"/><br>
+                            <input id="video_name" type="text" name = "vidname" placeholder="Video name"><br>
+                            <input id="video_desc" type="text" name = "viddesc" placeholder="Video description"><br>
+                            
+                            <input id="submit_btn" type='submit' value='Upload'/>
+                    </form>  
+                </div>
+            </div>
+        </div>
+        <script>
+            function updateFileText() {
+                let file_input = document.getElementById("video");
+
+                let file = file_input.files[0];
+                const filesize_floored = Math.floor(Number(file.size) / 1000 / 1000);
+
+                const filename_elem = document.getElementById("filename");
+                const filesize_elem = document.getElementById("filesize");
+                
+                filename_elem.innerText = file_input.value.split("\\")[2];
+                
+                filename_elem.className = "";
+                filesize_elem.className = "";
+
+                filesize_elem.innerText = "Size: " + filesize_floored + " mb";
+                filesize_elem.classList.add(filesize_floored <= 30 ? "acceptable" : "unacceptable");
+                filesize_elem.classList.add("visible");
+
+                filename_elem.classList.add(file_input.value.includes(".mp4") ? "acceptable" : "unacceptable");
+                filename_elem.classList.add("visible");
+
+                if (filesize_floored > 30 || !file_input.value.includes(".mp4")) {
+                    document.getElementById("submit_btn").classList.add("invisible");
+                    document.getElementById("video_name").classList.add("invisible");
+                    document.getElementById("video_desc").classList.add("invisible");
+                }
+                else {
+                    document.getElementById("submit_btn").classList.remove("invisible");
+                    document.getElementById("video_name").classList.remove("invisible");
+                    document.getElementById("video_desc").classList.remove("invisible");
+                }
+            }
+        </script>
+    </body>
+</html>
