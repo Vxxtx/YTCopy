@@ -3,12 +3,12 @@ A site with capability to play videos, and the possibility to comment on them an
 
 Required modules are
 
-*express
-*fs
-*bcrypt
-*path
-*cors
-*express-fileupload
-*cookie-parser
-*ejs
-*mongoose
+* express
+* fs
+* bcrypt
+* path
+* cors
+* express-fileupload
+* cookie-parser
+* ejs
+* mongoose
